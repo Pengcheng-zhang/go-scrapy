@@ -1,0 +1,10 @@
+.idea
+.idea/*
+.vscode
+.vscode/*
+src/github.com
+src/github.com/*
+pkg/*
+debug/
+bin/*
+./*.exe
