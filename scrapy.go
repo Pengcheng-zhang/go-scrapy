@@ -1,19 +1,18 @@
 package main
 
 import(
-	"fmt"
-	"common"
+	"commons"
 )
 
 func main() {
-	s, err := common.NewSpider("booktxt")
+	s, err := commons.NewSpider("huxiu")
 	if err != nil {
-		common.ERROR("new spider error:", err.Error())
+		commons.ERROR("new spider error:", err.Error())
+		return
 	}
-	err = s.SpiderUrl("http://www.booktxt.net/2_2219")
+	err = s.SpiderUrl("https://www.huxiu.com")
 	if err != nil {
-		common.ERROR("new document error:", err.Error())
+		commons.ERROR("new document error:", err.Error())
+		return
 	}
-	var str string
-	fmt.Scan(&str)
 }
