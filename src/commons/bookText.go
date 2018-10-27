@@ -53,7 +53,8 @@ func spiderChapter(bookId int, chapter models.ChapterModel) {
 	}
 }
 
-func(this *BookTextSpider) SpiderUrl(url string) error {
+func(this *BookTextSpider) SpiderUrl() error {
+	url := ""
 	book := models.BookModel{}
 	book.Url = url
 	doc, err := goquery.NewDocument(url)

@@ -5,6 +5,8 @@
 src/github.com
 src/github.com/*
 pkg/*
+debug
 debug/
 bin/*
-./*.exe
+log/*
+*.exe
