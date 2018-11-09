@@ -8,6 +8,7 @@ import (
 type OpfriendsModel struct{
 	Id int
 	UserId int
+	Title string
 	Name string
 	BirthDay string
 	Height string

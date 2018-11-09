@@ -19,7 +19,7 @@ func(this *OpFriends) SpiderUrl() error {
 	page := 1
 	result := queryPageInfo(url + strconv.Itoa(page))
 	if result == nil {
-		for page=2;result == nil&&page <5;page++ {
+		for page=2;result == nil&&page <10;page++ {
 			fmt.Println(page)
 			result = queryPageInfo(url + strconv.Itoa(page))
 			fmt.Println(result)
@@ -44,13 +44,13 @@ func queryPageInfo(url string) error{
 		}
 	})
 	
-	var ch = make(chan string, 5)
+	var ch = make(chan string, 40)
 	for _,linkUrl := range jobboleLinks {
 		ch <- time.Now().String()
 		go getFriendsInfo(linkUrl, ch)
 	}
 
-	for i:=0;i<5;i++ {
+	for i:=0;i<40;i++ {
 		ch <- time.Now().String()
 	}
 	close(ch)
@@ -69,10 +69,13 @@ func getFriendsInfo(url string, ch chan string) {
 	friends := models.OpfriendsModel{}
 	articleTitle := doc.Find(".p-single .p-tit-single").Text()
 	if articleTitle == "" {
+		DEBUG("get article title failed:", url)
 		return
 	}
+	friends.Title = articleTitle
 	articleContent, err := doc.Find(".p-single .p-entry>p").Html()
-	if articleContent == "" {
+	if err != nil || articleContent == "" {
+		DEBUG("get article content failed:", url)
 		return
 	}
 	reg := regexp.MustCompile(`\n`)
